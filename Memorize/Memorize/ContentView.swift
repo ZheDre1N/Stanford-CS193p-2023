@@ -8,45 +8,58 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State var emojis = ["🤯", "😎", "🍔", "🎲"]
+
   var body: some View {
-    VStack(content: {
-      HStack(content: {
-        CardView()
-        CardView()
-        CardView()
-      })
-      HStack(content: {
-        CardView()
-        CardView(isFacedUp: true)
-        CardView()
-      })
-      HStack(content: {
-        CardView()
-        CardView()
-        CardView()
-      })
-    })
-    .foregroundStyle(.orange)
+    VStack {
+      ScrollView {
+        cards
+      }
+      buttons
+    }
     .padding()
+  }
+  
+  var cards: some View {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))])  {
+      ForEach(emojis.indices, id: \.self) { index in
+        CardView(isFacedUp: true, content: emojis[index])
+          .aspectRatio(2/3, contentMode: .fit)
+      }
+    }
+    .foregroundStyle(.blue)
+  }
+  
+  @ViewBuilder
+  var buttons: some View {
+      Button("Add card") {
+        emojis.append(emojis.randomElement()!)
+      }
+      .foregroundStyle(.blue)
+      Button("Reset") {
+        emojis = ["🤯", "😎", "🍔", "🎲"]
+      }
   }
 }
 
 struct CardView: View {
-  var isFacedUp: Bool = false
+  @State var isFacedUp: Bool = false
+  let content: String
   
   var body: some View {
-    ZStack(content: {
-      if isFacedUp {
-        RoundedRectangle(cornerRadius: 12)
-          .foregroundStyle(.white)
-        RoundedRectangle(cornerRadius: 12)
-          .strokeBorder(style: .init(lineWidth: 2))
-        Text("🤯")
-          .font(.largeTitle)
-      } else {
-        RoundedRectangle(cornerRadius: 12)
+    ZStack {
+      let base = RoundedRectangle(cornerRadius: 10)
+
+      Group {
+        base.fill(.white)
+        base.strokeBorder(style: .init(lineWidth: 2))
+        Text(content).font(.largeTitle)
       }
-    })
+      base.fill().opacity(isFacedUp ? 0 : 1)
+    }
+    .onTapGesture {
+      isFacedUp.toggle()
+    }
   }
 }
 
