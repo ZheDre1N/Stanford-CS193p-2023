@@ -54,11 +54,11 @@ struct ContentView: View {
   private func gridItems(for count: Int) -> [GridItem] {
     switch count {
     case 0..<9:
-      return [GridItem(), GridItem(), GridItem()]
+      return Array(repeatElement(GridItem(), count: 3))
     case 9..<12:
-      return [GridItem(), GridItem(), GridItem(), GridItem()]
+      return Array(repeatElement(GridItem(), count: 4))
     default:
-      return [GridItem(), GridItem(), GridItem(), GridItem(), GridItem()]
+      return Array(repeatElement(GridItem(), count: 5))
     }
     
   }
