@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
   @State var currentEmojisSet = EmojiesSet.empty
+  @State var selectedIndex = -1
 
   var body: some View {
     VStack {
@@ -37,15 +38,21 @@ struct ContentView: View {
       Spacer()
       ThemeButton(text: "Vehicles", imageSystemName: "car") {
         currentEmojisSet = .vehiclesEmojis
+        selectedIndex = 0
       }
+      .foregroundStyle(selectedIndex == 0 ? .primary : .secondary)
       Spacer()
       ThemeButton(text: "Sports", imageSystemName: "figure.run") {
         currentEmojisSet = .sportsEmojis
+        selectedIndex = 1
       }
+      .foregroundStyle(selectedIndex == 1 ? .primary : .secondary)
       Spacer()
       ThemeButton(text: "Countries", imageSystemName: "flag") {
         currentEmojisSet = .countriesEmojis
+        selectedIndex = 2
       }
+      .foregroundStyle(selectedIndex == 2 ? .primary : .secondary)
       Spacer()
     }
     .foregroundStyle(.primary)
@@ -60,7 +67,6 @@ struct ContentView: View {
     default:
       return Array(repeatElement(GridItem(), count: 5))
     }
-    
   }
 }
 
