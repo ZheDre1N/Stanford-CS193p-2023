@@ -25,7 +25,7 @@ final class EmojiMemoryGameViewModel: ObservableObject {
     @Published private var model = createMemoryGame()
     
     var cards: [Card] {
-        return model.cards
+        model.cards
     }
     
     var color: Color {

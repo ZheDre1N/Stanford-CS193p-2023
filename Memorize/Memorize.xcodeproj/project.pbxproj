@@ -72,7 +72,6 @@
 				DF8AD6852AA35ED300C42893 /* Assets.xcassets */,
 				DF8AD6872AA35ED300C42893 /* Preview Content */,
 				DF3BEB242ABE0F9100866378 /* AspectVGrid.swift */,
-				DFC809932ABF0D8000A827FB /* Cardify.swift */,
 				DFC809952ABF0DBF00A827FB /* EmojiMemoryGameView.swift */,
 			);
 			path = Memorize;
@@ -89,6 +88,7 @@
 		DFB6F81E2AA7C2810023760F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DFC809932ABF0D8000A827FB /* Cardify.swift */,
 				DFC809992ABF0E1700A827FB /* Pie.swift */,
 				DFC809912ABF0D7100A827FB /* CardView.swift */,
 				DFC809972ABF0DD900A827FB /* FlyingNumber.swift */,
@@ -316,6 +316,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -345,6 +346,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -28,13 +28,9 @@ struct Cardify: ViewModifier, Animatable {
       let base = RoundedRectangle(cornerRadius: Constants.cornerRadius)
       base
         .strokeBorder(lineWidth: Constants.lineWidth)
-        .background(
-          base
-            .fill(Color.white)
-        )
-        .overlay(content)
+        .background(base.fill(Color.white))
+        .overlay { content }
         .opacity(isFaceUp ? 1 : 0)
-      
       base
         .fill()
         .opacity(isFaceUp ? 0 : 1)
