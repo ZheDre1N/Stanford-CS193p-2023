@@ -17,16 +17,17 @@ struct CardView: View {
   }
   
   var body: some View {
-    TimelineView(.animation(minimumInterval: 1/20)) { timeline in
-      Pie(endAngle: .degrees(240))
-        .opacity(Constants.Pie.opacity)
-        .overlay {
-          cardContents
-            .padding(Constants.Pie.inset)
-        }
-        .padding(Constants.inset)
-        .cardify(isFaceUp: card.isFaceUp)
-        .transition(.scale)
+    TimelineView(.animation) { timeline in
+      if card.isFaceUp || !card.isMatched {
+        Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
+          .opacity(Constants.Pie.opacity)
+          .overlay(cardContents.padding(Constants.Pie.inset))
+          .padding(Constants.inset)
+          .cardify(isFaceUp: card.isFaceUp)
+          .transition(.scale)
+      } else {
+        Color.clear
+      }
     }
   }
   
@@ -39,21 +40,9 @@ struct CardView: View {
       .rotationEffect(.degrees(card.isMatched ? 360 : 0))
       .animation(.spin(duration: 1), value: card.isMatched)
   }
-}
-
-extension Animation {
-  static func spin(duration:  TimeInterval) -> Animation {
-    .linear(duration: 1)
-    .repeatForever(autoreverses: false)
-  }
-}
-
-extension CardView {
+  
   private struct Constants {
-    static let cornerRadius: CGFloat = 12
-    static let lineWidth: CGFloat = 2
     static let inset: CGFloat = 5
-    
     struct FontSize {
       static let largest: CGFloat = 200
       static let smallest: CGFloat = 10
@@ -66,18 +55,25 @@ extension CardView {
   }
 }
 
+extension Animation {
+  static func spin(duration: TimeInterval) -> Animation {
+    .linear(duration: 1).repeatForever(autoreverses: false)
+  }
+}
+
 struct CardView_Previews: PreviewProvider {
   typealias Card = CardView.Card
+  
   static var previews: some View {
     VStack {
       HStack {
-        CardView(Card(isFaceUp: true, content: "😡", id: "testl"))
-        CardView(Card(content: "😄", id: "test2"))
+        CardView(Card(isFaceUp: true, content: "X", id: "test1"))
+          .aspectRatio(4/3, contentMode: .fit)
+        CardView(Card(content: "X", id: "test1"))
       }
-      
       HStack {
-        CardView(Card(isFaceUp: true, isMatched: true, content: "😇", id: "testl"))
-        CardView(Card(isMatched: true, content: "🥰", id: "test2"))
+        CardView(Card(isFaceUp: true, isMatched: true, content: "This is a very long string and I hope it fits", id: "test1"))
+        CardView(Card(isMatched: true, content: "X", id: "test1"))
       }
     }
     .padding()
